@@ -1,37 +1,36 @@
 // src/components/MeetingRoom.tsx
 import React, { useEffect, useRef, useState } from 'react';
-import { HuddleClient } from '@huddle01/web-sdk';
 
 const MeetingRoom: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const client = new HuddleClient('<YOUR_API_KEY>');
-
-    client.on('error', (err) => {
-      setError(err.message);
-    });
-
-    client.on('joined', (room) => {
-      console.log(`Joined room: ${room.id}`);
-    });
-
-    const joinRoom = async () => {
+    const initWebRTC = async () => {
       try {
-        await client.join('<ROOM_ID>');
+        // Get user media (camera and microphone)
+        const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        
+        // Set the local stream to the video element
         if (videoRef.current) {
-          videoRef.current.srcObject = client.localStream;
+          videoRef.current.srcObject = localStream;
         }
+
+        // Additional WebRTC setup and event listeners here
+        // This is where you would set up your WebRTC connection, signaling, etc.
       } catch (err) {
-        setError('Failed to join the room.');
+        setError('Failed to initialize WebRTC client: ' + err.message);
       }
     };
 
-    joinRoom();
+    initWebRTC(); 
 
     return () => {
-      client.leave();
+      // Clean up WebRTC connections and event listeners here
+      if (videoRef.current && videoRef.current.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+        tracks.forEach(track => track.stop());
+      }
     };
   }, []);
 
