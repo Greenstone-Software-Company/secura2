@@ -13,7 +13,7 @@ const DocumentUpload = () => {
   };
 
   const handleUpload = async () => {
-    if (file && session) {
+    if (file && session && session.user) {
       try {
         const wallet = session.user.wallet; // Assuming wallet is stored in session
         const transactionId = await uploadToArweave(file, wallet);
@@ -21,6 +21,8 @@ const DocumentUpload = () => {
       } catch (error) {
         console.error('Upload failed:', error);
       }
+    } else {
+      console.error('No file or session is not defined');
     }
   };
 
