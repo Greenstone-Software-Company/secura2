@@ -1,4 +1,3 @@
-// src/components/MeetingRoom.tsx
 import React, { useEffect, useRef, useState } from 'react';
 
 const MeetingRoom: React.FC = () => {
@@ -12,14 +11,19 @@ const MeetingRoom: React.FC = () => {
         const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         
         // Set the local stream to the video element
-        if (videoRef.current) {
-          videoRef.current.srcObject = localStream;
+        const videoElement = videoRef.current;
+        if (videoElement) {
+          videoElement.srcObject = localStream;
         }
 
         // Additional WebRTC setup and event listeners here
         // This is where you would set up your WebRTC connection, signaling, etc.
       } catch (err) {
-        setError('Failed to initialize WebRTC client: ' + err.message);
+        if (err instanceof Error) {
+          setError('Failed to initialize WebRTC client: ' + err.message);
+        } else {
+          setError('Failed to initialize WebRTC client.');
+        }
       }
     };
 
@@ -27,11 +31,13 @@ const MeetingRoom: React.FC = () => {
 
     return () => {
       // Clean up WebRTC connections and event listeners here
-      if (videoRef.current && videoRef.current.srcObject) {
-        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+      const videoElement = videoRef.current;
+      if (videoElement && videoElement.srcObject) {
+        const tracks = (videoElement.srcObject as MediaStream).getTracks();
         tracks.forEach(track => track.stop());
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

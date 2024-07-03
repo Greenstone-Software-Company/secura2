@@ -38,7 +38,11 @@ const DocumentUpload: React.FC = () => {
       setUploading(false);
     } catch (error) {
       console.error('Upload failed:', error);
-      setError('Upload failed: ' + error.message);
+      if (error instanceof Error) {
+        setError('Upload failed: ' + error.message);
+      } else {
+        setError('Upload failed');
+      }
       setUploading(false);
     }
   };
