@@ -24,17 +24,17 @@ apiRoute.post(async (req, res) => {
 
     // Get the session
     const session = await getSession({ req });
-    if (!session || !session.user) {
+    if (!session || !session.user || !session.user.wallet) {
       res.status(401).send('Unauthorized');
       return;
     }
 
     const file = files.file as formidable.File;
-    const arweaveFile = file.filepath; // Use filepath for the correct path
+    const arweaveFile = 'filepath' in file ? file.filepath : file.path;
 
     try {
       // Upload the file to Arweave
-      const transactionId = await uploadToArweave(arweaveFile, session.user.wallet as string);
+      const transactionId = await uploadToArweave(arweaveFile as unknown as File, session.user.wallet);
       res.status(200).json({ transactionId });
     } catch (error) {
       res.status(500).json({ error: 'Upload failed: ' + (error as Error).message });

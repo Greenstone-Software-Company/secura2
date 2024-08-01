@@ -1,3 +1,5 @@
+// src/types/types.ts
+
 // Ensure UserSession includes role
 export interface UserSession {
   name?: string;

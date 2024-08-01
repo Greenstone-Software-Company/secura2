@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { uploadToArweave } from '../utils/arweave';
 import { useSession } from 'next-auth/react';
-import { UserSession } from '../types';
+import { UserSession } from '../types/types';
 
 const DocumentUpload: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);

@@ -1,0 +1,20 @@
+/* src/components/MeetingDirectory.module.css */
+.directory {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .entry {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+  
+  .icons img {
+    width: 20px;
+    height: 20px;
+  }
+  

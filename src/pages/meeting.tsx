@@ -1,12 +1,15 @@
-// Example: pages/meeting.tsx
-import { useHuddle01 } from '@huddle01/sdk';
-const Meeting = () => {
-  const { joinRoom, leaveRoom } = useHuddle01();
+// pages/meeting.tsx
+import React from 'react';
+import MeetingRoom from '../components/MeetingRoom';
+import Sidebar from '../components/Sidebar';
+
+const MeetingPage: React.FC = () => {
   return (
-    <div>
-      <button onClick={() => joinRoom('room-id')}>Join Meeting</button>
-      <button onClick={leaveRoom}>Leave Meeting</button>
+    <div className="pageLayout">
+      <Sidebar />
+      <MeetingRoom />
     </div>
   );
 };
-export default Meeting;
+
+export default MeetingPage;

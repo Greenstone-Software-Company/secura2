@@ -1,12 +1,13 @@
+// pages/poll.tsx
 import React from 'react';
-import Poll from '../components/Poll';
-import Vote from '../components/Vote';
+import PollCreationVoting from '../components/PollCreationVoting';
+import Sidebar from '../components/Sidebar';
 
 const PollPage: React.FC = () => {
   return (
-    <div>
-      <Poll />
-      <Vote />
+    <div className="pageLayout">
+      <Sidebar />
+      <PollCreationVoting />
     </div>
   );
 };
