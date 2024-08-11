@@ -1,34 +1,28 @@
+// utils/mongodb.ts
+
 import { MongoClient } from 'mongodb';
 
-let uri = process.env.MONGODB_URI;
-let dbName = process.env.MONGODB_DB;
-
-let cachedClient: MongoClient | null = null;
-let cachedDb: any = null;
-
-if (!uri) {
-  throw new Error(
-    'Please define the MONGODB_URI environment variable inside .env.local'
-  );
+if (!process.env.MONGODB_URI) {
+  throw new Error('Please add your Mongo URI to .env.local');
 }
 
-if (!dbName) {
-  throw new Error(
-    'Please define the MONGODB_DB environment variable inside .env.local'
-  );
-}
+const uri = process.env.MONGODB_URI;
+const options = {};
 
-export async function connectToDatabase() {
-  if (cachedClient && cachedDb) {
-    return { client: cachedClient, db: cachedDb };
+let client;
+let clientPromise: Promise<MongoClient>;
+
+if (process.env.NODE_ENV === 'development') {
+  // In development mode, use a global variable so that the MongoClient is not created multiple times
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, options);
+    global._mongoClientPromise = client.connect();
   }
-
-  const client = new MongoClient(uri);
-  await client.connect();
-  const db = client.db(dbName);
-
-  cachedClient = client;
-  cachedDb = db;
-
-  return { client, db };
+  clientPromise = global._mongoClientPromise;
+} else {
+  // In production mode, it's best to not use a global variable
+  client = new MongoClient(uri, options);
+  clientPromise = client.connect();
 }
+
+export default clientPromise;

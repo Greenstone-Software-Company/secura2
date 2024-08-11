@@ -1,5 +1,5 @@
-// src/components/MeetingRoom.tsx
 import React, { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import styles from './MeetingRoom.module.css';
 import Calendar from './Calendar';
 import MeetingDirectory from './MeetingDirectory';
@@ -50,11 +50,11 @@ const MeetingRoom: React.FC = () => {
           <div className={styles.searchBar}>
             <input type="text" placeholder="Search" />
             <button className={styles.searchButton}>
-              <img src="/search-icon.svg" alt="Search" />
+              <Image src="/search-icon.svg" alt="Search" width={20} height={20} />
             </button>
           </div>
           <div className={styles.userAvatar}>
-            <img src="/user-avatar.png" alt="User Avatar" />
+            <Image src="/user-avatar.png" alt="User Avatar" width={40} height={40} />
           </div>
         </div>
         <div className={styles.mainContent}>
