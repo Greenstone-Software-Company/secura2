@@ -10,10 +10,10 @@ const styles = {
     height: '70px',
     backgroundColor: '#0d111a',
     borderBottom: '1px solid #ffffff',
-    boxSizing: 'border-box',
+    boxSizing: 'border-box' as 'border-box', // Explicitly cast as 'border-box'
     boxShadow: '0px 2px 10px rgba(3,3,3,0.1)',
     display: 'flex',
-    justifyContent: 'flex-start', // Aligns the logo to the left
+    justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 20px',
     zIndex: 1000, /* Ensure the Navbar stays on top */
@@ -26,6 +26,16 @@ const styles = {
     width: '50px',
     height: '50px',
   },
+  NavLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '30px',
+  },
+  Link: {
+    color: '#ffffff',
+    textDecoration: 'none',
+    fontSize: '16px',
+  },
 };
 
 const Navbar = () => {
@@ -35,6 +45,12 @@ const Navbar = () => {
         <Link href="/">
           <img style={styles.LogoImage} src="/icons/secura.png" alt="Secura Logo" />
         </Link>
+      </div>
+      <div style={styles.NavLinks}>
+        <Link style={styles.Link} href="/home">Home</Link>
+        <Link style={styles.Link} href="/about">About Us</Link>
+        <Link style={styles.Link} href="/features">Features</Link>
+        <Link style={styles.Link} href="/contact">Contact Us</Link>
       </div>
     </div>
   );
