@@ -1,32 +1,70 @@
 .meetingSchedule {
-    padding: 20px;
-    background-color: #1d1d1d;
-    color: #fff;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .actions button {
-    margin-right: 10px;
-    padding: 10px;
-    background-color: #2d2d2d;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .meetingList {
-    margin-top: 20px;
-  }
-  
-  .meetingItem {
-    background-color: #2d2d2d;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
+  padding: 20px;
+  background-color: #f8f8f8; /* Updated to match the lighter background */
+  color: #1a1a1a; /* Use a dark color for text */
+  border-radius: 15px; /* Smooth border for the container */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add a light shadow for depth */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Add space between header and meeting list */
+}
+
+.actions button {
+  margin-right: 10px;
+  padding: 10px 20px; /* Increased padding for a more prominent button */
+  background-color: #e0e0e0; /* Lighter button background */
+  border: none;
+  color: #1a1a1a; /* Dark color for text */
+  cursor: pointer;
+  border-radius: 8px; /* Round button corners */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.actions button:hover {
+  background-color: #d0d0d0; /* Slightly darker on hover */
+}
+
+.meetingList {
+  margin-top: 20px;
+}
+
+.meetingItem {
+  background-color: #ffffff; /* White background for meeting items */
+  padding: 20px; /* Increased padding for a more spacious feel */
+  margin-bottom: 15px; /* More space between items */
+  border-radius: 10px; /* Round corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease; /* Subtle hover effect */
+}
+
+.meetingItem:hover {
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.meetingItem img {
+  border-radius: 50%; /* Circular images */
+  width: 40px;
+  height: 40px;
+}
+
+.meetingItem .meetingDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.meetingItem .meetingDetails span {
+  margin-bottom: 5px;
+  color: #333; /* Dark color for meeting details text */
+}
+
+.meetingItem .meetingDetails span.title {
+  font-weight: bold;
+  font-size: 1.1em;
+}

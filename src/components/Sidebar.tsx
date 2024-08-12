@@ -1,4 +1,3 @@
-// src/components/Sidebar.tsx
 import React from 'react';
 import Link from 'next/link';
 import styles from './Sidebar.module.css';
@@ -6,7 +5,7 @@ import styles from './Sidebar.module.css';
 const Sidebar: React.FC = () => {
   return (
     <div className={styles.sidebar}>
-      <Link href="/meeting">
+      <Link href="/">
         <img src="/icons/meeting-icon.png" alt="Meeting Room" />
       </Link>
       <Link href="/schedule">

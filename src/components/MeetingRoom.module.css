@@ -1,104 +1,130 @@
 /* src/components/MeetingRoom.module.css */
 .container {
-    display: flex;
-  }
-  
-  .dashboard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f0f0f0;
-    min-height: 100vh;
-    padding: 20px;
-    width: calc(100% - 80px); /* Adjusting for sidebar width */
-    margin-left: 80px; /* Adjusting for sidebar */
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-  }
-  
-  .welcomeMessage {
-    font-size: 24px;
-  }
-  
-  .searchBar {
-    display: flex;
-    align-items: center;
-    width: 300px;
-  }
-  
-  .searchBar input {
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    flex-grow: 1;
-  }
-  
-  .searchButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin-left: 5px;
-  }
-  
-  .searchButton img {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .userAvatar {
-    display: flex;
-    align-items: center;
-  }
-  
-  .userAvatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-left: 10px;
-  }
-  
-  .mainContent {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-    width: 100%;
-  }
-  
-  .meetingSchedule, .createNew, .meetingDirectory, .meetingFeed {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .sectionTitle {
-    margin-bottom: 10px;
-  }
-  
-  .videoSection {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .video {
-    max-width: 600px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .error {
-    color: red;
-  }
-  
+  display: flex;
+  background-color: #f8f8f8; /* Light background for the entire container */
+}
+
+.sidebar {
+  width: 80px;
+  background-color: #151515; /* Dark sidebar */
+  min-height: 100vh;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff; /* White icons and text */
+}
+
+.sidebarIcon {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.sidebarIcon img {
+  width: 30px;
+  height: 30px;
+}
+
+.dashboard {
+  flex-grow: 1;
+  padding: 40px; /* Increased padding for a more spacious feel */
+  background-color: #f0f0f0; /* Light gray background */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #fff; /* White header background */
+  color: #333; /* Dark text color */
+  padding: 15px 20px; /* Adjusted padding for balance */
+  border-radius: 10px; /* Smooth rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  margin-bottom: 30px; /* More space below the header */
+}
+
+.welcomeMessage {
+  font-size: 28px; /* Larger, more prominent text */
+  font-weight: bold;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  width: 400px; /* Increased width for a more balanced look */
+  background-color: #f8f8f8; /* Light background */
+  border-radius: 20px; /* Smooth, rounded corners */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Inset shadow for depth */
+  padding: 8px 16px;
+}
+
+.searchBar input {
+  border: none;
+  background: none;
+  flex-grow: 1;
+  outline: none;
+  font-size: 16px; /* Slightly larger input text */
+  padding-left: 10px;
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.searchButton img {
+  width: 20px;
+  height: 20px;
+}
+
+.userAvatar {
+  display: flex;
+  align-items: center;
+}
+
+.userAvatar img {
+  width: 50px; /* Larger avatar size */
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+
+.mainContent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+  grid-gap: 30px; /* More space between elements */
+}
+
+.meetingSchedule, .createNew, .meetingDirectory, .meetingFeed {
+  background-color: #fff; /* White background for all sections */
+  padding: 25px; /* Increased padding for more comfortable spacing */
+  border-radius: 15px; /* Smooth, rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Consistent light shadow */
+}
+
+.sectionTitle {
+  margin-bottom: 15px; /* More space below the title */
+  font-weight: bold;
+  font-size: 20px;
+  color: #333; /* Dark text color */
+}
+
+.videoSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px; /* More space above the video section */
+}
+
+.video {
+  max-width: 600px;
+  border-radius: 15px; /* Smooth, rounded corners for video */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.error {
+  color: red;
+}

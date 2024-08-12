@@ -1,13 +1,12 @@
-// src/pages/index.tsx
 import React from 'react';
 import styles from '../styles/Index.module.css';
-import Navbar from '../components/Navbar';
 import MeetingRoom from '../components/MeetingRoom';
+import Sidebar from '../components/Sidebar';
 
 const HomePage: React.FC = () => {
   return (
     <div className={styles.container}>
-      <Navbar />
+      <Sidebar />
       <div className={styles.main}>
         <MeetingRoom />
       </div>

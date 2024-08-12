@@ -1,55 +1,75 @@
+.screen {
+  background-color: #0d111a; /* Matches the Uizard design background */
+  min-height: 100vh; /* Ensures the screen takes up the full viewport height */
+  padding-left: 67px; /* Adjusts padding to account for the sidebar */
+  box-sizing: border-box; /* Ensures padding is included in the element's total width and height */
+}
+
 .pollCreationVoting {
-    padding: 20px;
-    background-color: #1d1d1d;
-    color: #fff;
-  }
-  
-  .createPoll {
-    margin-bottom: 20px;
-  }
-  
-  .createPoll input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #2d2d2d;
-    border: none;
-    color: #fff;
-  }
-  
-  .createPoll button {
-    padding: 10px;
-    background-color: #2d2d2d;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  .votingResults {
-    margin-bottom: 20px;
-  }
-  
-  .resultItem {
-    background-color: #2d2d2d;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .activePolls .pollItem {
-    background-color: #2d2d2d;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .pollItem button {
-    padding: 10px;
-    background-color: #2d2d2d;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-  
+  padding: 20px;
+  background-color: #1a1a1a; /* Darker background to contrast with the light text */
+  color: #f8f8f8; /* Light color for text to stand out against the dark background */
+  border-radius: 15px; /* Smooth border for the container */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+.createPoll {
+  margin-bottom: 20px;
+}
+
+.createPoll input {
+  display: block;
+  width: 100%;
+  padding: 15px; /* Increased padding for a more spacious feel */
+  margin-bottom: 10px;
+  background-color: #333; /* Darker background for input fields */
+  border: 1px solid #444; /* Subtle border */
+  color: #f8f8f8; /* Lighter text color */
+  border-radius: 8px; /* Rounded corners for input fields */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Slight inset shadow for depth */
+}
+
+.createPoll button {
+  padding: 12px 25px; /* Increased padding for a more prominent button */
+  background-color: #4a90e2; /* Updated button background to match the design */
+  border: none;
+  color: #fff; /* White text color for contrast */
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: 8px; /* Round button corners */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.createPoll button:hover {
+  background-color: #3b7ac4; /* Slightly darker on hover */
+}
+
+.votingResults {
+  margin-bottom: 20px;
+}
+
+.resultItem, .pollItem {
+  background-color: #333; /* Darker background for result and poll items */
+  padding: 20px; /* Increased padding for a more comfortable layout */
+  margin-bottom: 10px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #f8f8f8; /* Lighter text color for readability */
+}
+
+.pollItem button {
+  padding: 10px 20px; /* Increased padding for buttons */
+  background-color: #4a90e2; /* Updated button background */
+  border: none;
+  color: #fff; /* White text for contrast */
+  cursor: pointer;
+  border-radius: 8px; /* Rounded corners for buttons */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.pollItem button:hover {
+  background-color: #3b7ac4; /* Darker on hover */
+}
