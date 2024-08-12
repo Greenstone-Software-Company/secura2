@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const styles = {
   Header: {
-    position: 'fixed',
+    position: 'fixed' as 'fixed', // Explicitly cast as 'fixed'
     top: '0px',
     left: '0px',
     width: '100%',
@@ -16,7 +16,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 20px',
-    zIndex: 1000, /* Ensure the Navbar stays on top */
+    zIndex: 1000, // Ensure the Navbar stays on top
   },
   Logo: {
     display: 'flex',
@@ -45,12 +45,6 @@ const Navbar = () => {
         <Link href="/">
           <img style={styles.LogoImage} src="/icons/secura.png" alt="Secura Logo" />
         </Link>
-      </div>
-      <div style={styles.NavLinks}>
-        <Link style={styles.Link} href="/home">Home</Link>
-        <Link style={styles.Link} href="/about">About Us</Link>
-        <Link style={styles.Link} href="/features">Features</Link>
-        <Link style={styles.Link} href="/contact">Contact Us</Link>
       </div>
     </div>
   );
