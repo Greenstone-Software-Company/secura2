@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@huddle01/react": "^2.1.4",
+    "@microsoft/mgt": "^4.2.4",
+    "@microsoft/mgt-element": "^4.2.4",
+    "@microsoft/mgt-msal-provider": "^2.11.2",
+    "@microsoft/mgt-msal2-provider": "^4.2.4",
     "@microsoft/mgt-react": "^4.2.4",
     "@microsoft/microsoft-graph-client": "^3.0.7",
     "@react-oauth/google": "^0.12.1",
