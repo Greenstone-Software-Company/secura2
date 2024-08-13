@@ -1,31 +1,35 @@
 .meetingSchedule {
   padding: 20px;
-  background-color: #f8f8f8; /* Updated to match the lighter background */
-  color: #1a1a1a; /* Use a dark color for text */
-  border-radius: 15px; /* Smooth border for the container */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add a light shadow for depth */
+  background-color: #0d111a; /* Match the dark background */
+  color: #ffffff; /* Ensure the text color is white */
+  border-radius: 15px; /* Keep the smooth border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  margin: 20px; /* Ensure there is space around the container */
+  max-width: calc(100% - 100px); /* Adjust width to account for sidebar */
+  margin-left: 80px; /* Align to the right of the sidebar */
+  overflow-x: hidden; /* Hide any overflow */
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px; /* Add space between header and meeting list */
+  margin-bottom: 20px; /* Space between header and meeting list */
 }
 
 .actions button {
   margin-right: 10px;
-  padding: 10px 20px; /* Increased padding for a more prominent button */
-  background-color: #e0e0e0; /* Lighter button background */
+  padding: 10px 20px; /* Prominent button padding */
+  background-color: #007bff; /* Button color to match the theme */
   border: none;
-  color: #1a1a1a; /* Dark color for text */
+  color: #ffffff;
   cursor: pointer;
-  border-radius: 8px; /* Round button corners */
-  transition: background-color 0.3s ease; /* Smooth hover effect */
+  border-radius: 8px; /* Round corners */
+  transition: background-color 0.3s ease;
 }
 
 .actions button:hover {
-  background-color: #d0d0d0; /* Slightly darker on hover */
+  background-color: #0056b3; /* Slightly darker on hover */
 }
 
 .meetingList {
@@ -33,38 +37,16 @@
 }
 
 .meetingItem {
-  background-color: #ffffff; /* White background for meeting items */
-  padding: 20px; /* Increased padding for a more spacious feel */
-  margin-bottom: 15px; /* More space between items */
-  border-radius: 10px; /* Round corners */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  background-color: #1a1a1a; /* Slightly darker background */
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: transform 0.2s ease; /* Subtle hover effect */
 }
 
 .meetingItem:hover {
-  transform: translateY(-2px); /* Slight lift on hover */
-}
-
-.meetingItem img {
-  border-radius: 50%; /* Circular images */
-  width: 40px;
-  height: 40px;
-}
-
-.meetingItem .meetingDetails {
-  display: flex;
-  flex-direction: column;
-}
-
-.meetingItem .meetingDetails span {
-  margin-bottom: 5px;
-  color: #333; /* Dark color for meeting details text */
-}
-
-.meetingItem .meetingDetails span.title {
-  font-weight: bold;
-  font-size: 1.1em;
+  transform: translateY(-2px);
 }
