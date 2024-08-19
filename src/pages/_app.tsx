@@ -1,19 +1,18 @@
-// src/pages/_app.tsx
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
-import Navbar from '../components/Navbar';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { HuddleClientProvider } from '@huddle01/react';
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <>
-        <Navbar />
-        <div className="container mx-auto p-4">
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}>
+      <HuddleClientProvider projectId={process.env.NEXT_PUBLIC_HUDDLE01_PROJECT_ID as string}>
+        <SessionProvider session={session}>
           <Component {...pageProps} />
-        </div>
-      </>
-    </SessionProvider>
+        </SessionProvider>
+      </HuddleClientProvider>
+    </GoogleOAuthProvider>
   );
 }
 

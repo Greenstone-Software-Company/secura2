@@ -18,6 +18,7 @@ const MicrosoftProvider = {
       id: profile.sub,
       name: profile.name,
       email: profile.email,
+      image: profile.picture, // Ensure the image URL is included
     };
   },
   clientId: process.env.MICROSOFT_CLIENT_ID as string,

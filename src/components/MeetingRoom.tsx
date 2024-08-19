@@ -1,42 +1,58 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useHuddle01 } from '@huddle01/react';
+import { useAudio, useVideo, usePeers, useRoom } from '@huddle01/react/hooks';
 import Image from 'next/image';
 import styles from './MeetingRoom.module.css';
-import Calendar from './Calendar';
+import MeetingSchedule from './MeetingSchedule';
 import MeetingDirectory from './MeetingDirectory';
 import MeetingFeed from './MeetingFeed';
 import Sidebar from './Sidebar';
 
 const MeetingRoom: React.FC = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const { data: session } = useSession();
+  const { initialize, isInitialized } = useHuddle01();
+  const { joinRoom, leaveRoom } = useRoom();
+  const { produceAudio, stopProducingAudio } = useAudio();
+  const { produceVideo, stopProducingVideo } = useVideo();
+  const { peers } = usePeers();
+
+  const [roomId, setRoomId] = useState<string>('');
+  const [isJoined, setIsJoined] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const initWebRTC = async () => {
+    initialize(process.env.NEXT_PUBLIC_HUDDLE01_PROJECT_ID as string);
+  }, [initialize]);
+
+  const handleJoin = async () => {
+    if (isInitialized && roomId) {
       try {
-        const localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-        const videoElement = videoRef.current;
-        if (videoElement) {
-          videoElement.srcObject = localStream;
-        }
+        await joinRoom({
+          roomId: roomId,
+          token: 'your_token_here' // Replace with your actual token logic
+        });
+        setIsJoined(true);
+        await produceAudio();
+        await produceVideo();
       } catch (err) {
-        if (err instanceof Error) {
-          setError('Failed to initialize WebRTC client: ' + err.message);
-        } else {
-          setError('Failed to initialize WebRTC client.');
-        }
+        setError('Failed to join the meeting room.');
+        console.error(err);
       }
-    };
+    }
+  };
 
-    initWebRTC();
-
-    return () => {
-      const currentVideoRef = videoRef.current;
-      if (currentVideoRef && currentVideoRef.srcObject) {
-        const tracks = (currentVideoRef.srcObject as MediaStream).getTracks();
-        tracks.forEach(track => track.stop());
-      }
-    };
-  }, []);
+  const handleLeave = async () => {
+    try {
+      await stopProducingAudio();
+      await stopProducingVideo();
+      await leaveRoom();
+      setIsJoined(false);
+    } catch (err) {
+      setError('Failed to leave the meeting room.');
+      console.error(err);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -44,50 +60,76 @@ const MeetingRoom: React.FC = () => {
       <div className={styles.dashboard}>
         <div className={styles.header}>
           <div className={styles.welcomeMessage}>
-            <h1>Welcome, Freddy!</h1>
-            <p>View your upcoming meetings</p>
+            <h1>Welcome, {session?.user?.name || 'Board Member'}!</h1>
+            <p>Manage your board meetings</p>
           </div>
           <div className={styles.searchBar}>
-            <input type="text" placeholder="Search" />
+            <input type="text" placeholder="Search meetings or documents" />
             <button className={styles.searchButton}>
-              <Image src="/search-icon.svg" alt="Search" width={20} height={20} />
+              <Image src="/icons/search-icon.png" alt="Search" width={20} height={20} />
             </button>
           </div>
           <div className={styles.userAvatar}>
-            <Image src="/user-avatar.png" alt="User Avatar" width={40} height={40} />
+            {session?.user?.image ? (
+              <Image src={session.user.image} alt="User Avatar" width={40} height={40} />
+            ) : (
+              <Image src="/icons/user-avatar.png" alt="Default Avatar" width={40} height={40} />
+            )}
           </div>
         </div>
         <div className={styles.mainContent}>
-          <div className={styles.meetingSchedule}>
-            <h2 className={styles.sectionTitle}>Meeting schedule</h2>
-            <Calendar />
+          <div className={styles.meetingControls}>
+            <input
+              type="text"
+              value={roomId}
+              onChange={(e) => setRoomId(e.target.value)}
+              placeholder="Enter Room ID"
+            />
+            {!isJoined ? (
+              <button onClick={handleJoin} disabled={!isInitialized || !roomId}>
+                Join Meeting
+              </button>
+            ) : (
+              <button onClick={handleLeave}>Leave Meeting</button>
+            )}
           </div>
-          <div className={styles.createNew}>
-            <h2 className={styles.sectionTitle}>Create New</h2>
-            <button>New meeting</button>
-            <button>Create poll</button>
-            <button>Upload document</button>
-          </div>
-          <div className={styles.meetingDirectory}>
-            <h2 className={styles.sectionTitle}>Meeting Directory</h2>
+          {error && <p className={styles.error}>{error}</p>}
+          {isJoined && (
+            <div className={styles.meetingRoom}>
+              <div className={styles.videoGrid}>
+                {peers.map((peer) => (
+                  <video
+                    key={peer.peerId}
+                    ref={(videoElement) => {
+                      if (videoElement && peer.videoTrack) {
+                        videoElement.srcObject = new MediaStream([peer.videoTrack]);
+                      }
+                    }}
+                    autoPlay
+                    className={styles.videoStream}
+                  />
+                ))}
+              </div>
+              <div className={styles.audioControls}>
+                {peers.map((peer) => (
+                  <audio
+                    key={peer.peerId}
+                    ref={(audioElement) => {
+                      if (audioElement && peer.audioTrack) {
+                        audioElement.srcObject = new MediaStream([peer.audioTrack]);
+                      }
+                    }}
+                    autoPlay
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+          <MeetingSchedule />
+          <div className={styles.meetingInfo}>
             <MeetingDirectory />
-          </div>
-          <div className={styles.meetingFeed}>
-            <h2 className={styles.sectionTitle}>Meeting Feed</h2>
             <MeetingFeed />
           </div>
-        </div>
-        <div className={styles.videoSection}>
-          {error ? (
-            <p className={styles.error}>{error}</p>
-          ) : (
-            <video
-              ref={videoRef}
-              autoPlay
-              muted
-              className={styles.video}
-            />
-          )}
         </div>
       </div>
     </div>
