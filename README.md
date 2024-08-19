@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Secura - Board Governance Application
 
 ## Setup Instructions
@@ -55,3 +56,6 @@ For detailed implementation guidelines, refer to the `PROJECT_HANDOVER.md` file.
 ## Contribution Guidelines
 
 Please follow the existing code style and commit message conventions. Create feature branches and submit pull requests for review.
+=======
+# secura2
+>>>>>>> origin/main
